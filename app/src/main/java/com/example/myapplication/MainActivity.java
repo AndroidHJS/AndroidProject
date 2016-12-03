@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 mTvText.setText("你好我在GitHub中修改了");
+                mTvText.setTextSize(29f);
                 Toast.makeText(MainActivity.this,"点击了",Toast.LENGTH_SHORT).show();
             }
         });
