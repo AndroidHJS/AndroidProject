@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
         mTvText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mTvText.setText("我点击了下");
+                mTvText.setText("再次");
                 Toast.makeText(MainActivity.this,"点击了",Toast.LENGTH_SHORT).show();
             }
         });
