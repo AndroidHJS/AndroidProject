@@ -3,6 +3,7 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:paddingRight="3dp"
     android:paddingLeft="3dp"
+    android:id="@+id/layout_ganhuo"
     android:layout_height="match_parent">
     <TextView
         android:textSize="20dp"

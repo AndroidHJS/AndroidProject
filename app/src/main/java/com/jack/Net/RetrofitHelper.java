@@ -52,7 +52,7 @@ public class RetrofitHelper {
      * @param listener
      * @param mclass
      */
-    public static void getNewLatest(final RequestListener listener, final Class<?> mclass) {
+    public static void getNewLatestList(final RequestListener listener, final Class<?> mclass) {
         NewApi newApi = getZhiHuAPI();
         Call<String> NewCall = newApi.getNewLatest();
         NewCall.enqueue(new Callback<String>() {
@@ -95,8 +95,24 @@ public class RetrofitHelper {
 
     }
 
-    public static void  getGanHuoInfo(final  RequestListener listener,int count,int page,final Class<?> mclass){
+    public static void getGanHuoList(final  RequestListener listener, int count, int page, final Class<?> mclass){
         Call<String> gankCall= mGanHuoAPI.getGankAndroid(count, page);
+        gankCall.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                Gson gson = new Gson();
+                Object o = gson.fromJson(response.body().toString(), mclass);
+                listener.onSuccess(o);
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+
+            }
+        });
+    }
+    public static void  getMeiZhiList(final  RequestListener listener,int count,int page,final Class<?> mclass){
+        Call<String> gankCall= mGanHuoAPI.getGankMeizi(count,page);
         gankCall.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {

@@ -8,6 +8,9 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
+
+import com.jack.Net.RequestListener;
 
 import butterknife.ButterKnife;
 
@@ -15,13 +18,13 @@ import butterknife.ButterKnife;
  * Created by Administrator on 2016/12/4.
  */
 
-public abstract  class BaseFragment extends Fragment {
-    public Activity mActiviy;
+public abstract  class BaseFragment extends Fragment implements RequestListener{
+    public Activity mActivity;
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        mActiviy=(Activity) context;
+        mActivity =(Activity) context;
     }
 
     @Nullable
@@ -34,5 +37,17 @@ public abstract  class BaseFragment extends Fragment {
     }
     public  abstract  View getView(LayoutInflater inflater);
     public abstract  void initData();
+    public abstract  void bindData(Object obj);
 
+
+    @Override
+    public void onSuccess(Object obj) {
+        bindData(obj);
+
+    }
+
+    @Override
+    public void onFail(Throwable throwable) {
+        Toast.makeText(mActivity,"请求数据出错",Toast.LENGTH_LONG).show();
+    }
 }

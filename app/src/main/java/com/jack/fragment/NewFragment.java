@@ -9,7 +9,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.jack.Net.RequestListener;
 import com.jack.Net.RetrofitHelper;
 import com.jack.adapter.MainBannerAdapter;
 import com.jack.bean.New;
@@ -17,7 +16,6 @@ import com.jack.bean.StoriesBean;
 import com.jack.bean.TopSotriesBean;
 import com.jack.comment.base.BaseFragment;
 import com.jack.main.R;
-import com.jack.mymy.MainActivity;
 import com.jack.mymy.NewDatailsActivity;
 
 import java.util.List;
@@ -43,68 +41,40 @@ public class NewFragment extends BaseFragment {
 
     @Override
     public void initData() {
-        RetrofitHelper.getNewLatest(new RequestListener() {
-            @Override
-            public void onSuccess(Object obj) {
-                if(obj instanceof New){
-                    New news= (New) obj;
-                    bindBannerDate(news.getTop_stories());
-                    bindNewsData(news.getStories());
+        RetrofitHelper.getNewLatestList(this,New.class);
+    }
+
+    @Override
+    public void bindData(Object obj) {
+        if(obj instanceof New){
+            New news= (New) obj;
+            List<TopSotriesBean> topSotriesBeans=news.getTop_stories();
+            List<StoriesBean> storiesBeen=news.getStories();
+            if(topSotriesBeans!=null||storiesBeen!=null){
+                mMainBannerAdapter=new MainBannerAdapter(topSotriesBeans, mActivity);
+                mViewPagerBanner.setAdapter(mMainBannerAdapter);
+                for (int i = 0; i <storiesBeen.size() ; i++) {
+                    View view=View.inflate(mActivity,R.layout.item_new,null);
+                    TextView TvTitle= (TextView) view.findViewById(R.id.tv_new_title);
+                    ImageView ImgNews= (ImageView) view.findViewById(R.id.img_news_img);
+                    LinearLayout layoutNew= (LinearLayout) view.findViewById(R.id.layout_new);
+                    final StoriesBean   item=storiesBeen.get(i);
+                    Glide.with(mActivity).load(item.getImages()[0]).into(ImgNews);
+                    TvTitle.setText(item.getTitle());
+                    layoutNew.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent=new Intent();
+                            intent.putExtra("newItem",item);
+                            intent.setClass(mActivity, NewDatailsActivity.class);
+                            mActivity.startActivity(intent);
+
+                        }
+                    });
+                    mLayoutNews.addView(view);
 
                 }
-
-
-
-
             }
-
-            @Override
-            public void onFail(Throwable throwable) {
-
-            }
-
-
-        },New.class);
-
-
-    }
-    private void  bindBannerDate(List<TopSotriesBean> data ){
-        mMainBannerAdapter=new MainBannerAdapter(data,mActiviy);
-        mViewPagerBanner.setAdapter(mMainBannerAdapter);
-    }
-    private void bindNewsData(List<StoriesBean> StoriesBean){
-        if(StoriesBean==null){
-            return;
         }
-        for (int i = 0; i <StoriesBean.size() ; i++) {
-            View view=View.inflate(mActiviy,R.layout.item_new,null);
-            initNewView(view,StoriesBean.get(i));
-            mLayoutNews.addView(view);
-
-        }
-
     }
-
-    private void initNewView(View view,final  StoriesBean item){
-        TextView TvTitle= (TextView) view.findViewById(R.id.tv_new_title);
-        ImageView ImgNews= (ImageView) view.findViewById(R.id.img_news_img);
-        LinearLayout layoutNew= (LinearLayout) view.findViewById(R.id.layout_new);
-        TextView TvNewTime= (TextView) view.findViewById(R.id.tv_new_time);
-        Glide.with(mActiviy).load(item.getImages()[0]).into(ImgNews);
-        TvTitle.setText(item.getTitle());
-        layoutNew.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent=new Intent();
-                intent.putExtra("newItem",item);
-                intent.setClass(mActiviy, NewDatailsActivity.class);
-                mActiviy.startActivity(intent);
-
-            }
-        });
-
-
-    }
-
-
 }

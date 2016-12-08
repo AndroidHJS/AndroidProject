@@ -1,15 +1,12 @@
 package com.jack.mymy;
 
-import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 
 import com.jack.adapter.MainAdapter;
-import com.jack.comment.base.BaseAcitivity;
+import com.jack.comment.base.BaseActivity;
 import com.jack.comment.base.BaseFragment;
 import com.jack.fragment.GanioFragment;
 import com.jack.fragment.MeiZiFragment;
@@ -17,9 +14,8 @@ import com.jack.fragment.NewFragment;
 import com.jack.main.R;
 
 import butterknife.Bind;
-import butterknife.ButterKnife;
 
-public class MainActivity extends BaseAcitivity {
+public class MainActivity extends BaseActivity {
     @Bind(R.id.tabs)
     TabLayout mMainTayLayout;
     @Bind(R.id.viewpager)
@@ -43,7 +39,6 @@ public class MainActivity extends BaseAcitivity {
     public void init(){
         mFragmentManager=this.getSupportFragmentManager();
         setSupportActionBar(mToolBar);
-
         mMainAdapter= new MainAdapter(mFragmentManager,mTabs,mFragment);
         mMainViewPager.setAdapter(mMainAdapter);
         mMainTayLayout.setupWithViewPager(mMainViewPager);

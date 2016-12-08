@@ -13,7 +13,7 @@ import butterknife.ButterKnife;
  * Created by Administrator on 2016/12/6.
  */
 
-public abstract  class BaseAcitivity extends AppCompatActivity {
+public abstract  class BaseActivity extends AppCompatActivity {
 
 
     @Override
@@ -28,4 +28,10 @@ public abstract  class BaseAcitivity extends AppCompatActivity {
     public  abstract void initData();
     public abstract void init();
     public abstract int  getLayoutId();
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        ButterKnife.unbind(this);
+    }
 }

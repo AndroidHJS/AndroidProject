@@ -5,13 +5,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.jack.Net.RequestListener;
 import com.jack.Net.RetrofitHelper;
 import com.jack.bean.StoriesBean;
-import com.jack.comment.base.BaseAcitivity;
+import com.jack.comment.base.BaseActivity;
 import com.jack.main.R;
 
 
@@ -20,7 +19,7 @@ import org.json.JSONObject;
 
 import butterknife.Bind;
 
-public class NewDatailsActivity extends BaseAcitivity {
+public class NewDatailsActivity extends BaseActivity {
     @Bind(R.id.webView_new_Dataisl)
     WebView mWebView;
     @Bind(R.id.img_news_datails)

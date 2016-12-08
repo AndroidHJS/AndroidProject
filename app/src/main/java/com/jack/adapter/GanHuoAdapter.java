@@ -1,64 +1,62 @@
 package com.jack.adapter;
-
-import android.content.Context;
-import android.support.v7.widget.RecyclerView;
+import android.content.Intent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import com.bumptech.glide.Glide;
 import com.jack.bean.GanHuoBean;
+import com.jack.comment.base.BaseRecyclerViewAdapter;
+import com.jack.comment.base.BaseRecyclerViewHolder;
 import com.jack.main.R;
+import com.jack.mymy.GanHuoDatailsActivity;
 
 import java.util.List;
-
 import butterknife.Bind;
-import butterknife.ButterKnife;
 
 /**
  * Created by Administrator on 2016/12/7.
  */
 
-public class GanHuoAdapter  extends RecyclerView.Adapter<GanHuoAdapter.GanHuoViewHolder> {
-    private Context mContext;
-    private List<GanHuoBean> mData;
-    public  GanHuoAdapter(Context Context, List<GanHuoBean> mData){
-        this.mContext=Context;
-        this.mData=mData;
+public class GanHuoAdapter extends BaseRecyclerViewAdapter<GanHuoBean> {
+    public GanHuoAdapter(List<GanHuoBean> data) {
+        super(data);
     }
 
     @Override
-    public GanHuoViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View  view=View.inflate(mContext, R.layout.item_ganhuo,null);
-        GanHuoViewHolder holder=new GanHuoViewHolder(view);
-        return holder;
+    public BaseRecyclerViewHolder getViewHolder(int viewType) {
+        View view=View.inflate(mContext,R.layout.item_ganhuo,null);
+        return new GanHuoViewHolder(view) ;
     }
 
     @Override
-    public void onBindViewHolder(GanHuoViewHolder holder, int position) {
-        GanHuoBean ganHuoBean = mData.get(position);
-        holder.mTvTitle.setText(ganHuoBean.getDesc());
-        if(ganHuoBean.getImages()!=null){
-            Glide.with(mContext).load(ganHuoBean.getImages()[0]).into(holder.mImgProject);
+    public void bindData(BaseRecyclerViewHolder holder, final GanHuoBean ganHuoBean) {
+        if(holder instanceof GanHuoViewHolder){
+             GanHuoViewHolder tempHolder= (GanHuoViewHolder) holder;
+            String[] imgUrl=ganHuoBean.getImages();
+            if(imgUrl!=null){
+                tempHolder.setImage(imgUrl[0],tempHolder.mImgProject);
+            }
+            tempHolder.setText(ganHuoBean.getDesc(),tempHolder.mTvTitle);
+            tempHolder.setText(ganHuoBean.getPublishedAt(),tempHolder.mTvTime);
+            tempHolder.setText(ganHuoBean.getWho(),tempHolder.mTvName);
+            tempHolder.mLayout_ganhuo.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent=new Intent();
+                    intent.putExtra("url",ganHuoBean.getUrl());
+                    intent.setClass(mContext, GanHuoDatailsActivity.class);
+                    mContext.startActivity(intent);
+                }
+            });
         }
-        holder.mTvTime.setText(ganHuoBean.getCreatedAt());
-        holder.mTvName.setText(ganHuoBean.getWho());
-
 
     }
-   public  void addData( List<GanHuoBean> data){
-       this.mData.addAll(data);
-       this.notifyDataSetChanged();
-
-   }
-
-    @Override
-    public int getItemCount() {
-        return mData.size();
+    public  void addData(List<GanHuoBean> data){
+        mData.addAll(data);
+        notifyDataSetChanged();
     }
 
-   static class GanHuoViewHolder extends RecyclerView.ViewHolder{
+    static class GanHuoViewHolder extends BaseRecyclerViewHolder {
          @Bind(R.id.tv_project_decs)
          TextView mTvTitle;
         @Bind(R.id.img_project_img)
@@ -67,9 +65,10 @@ public class GanHuoAdapter  extends RecyclerView.Adapter<GanHuoAdapter.GanHuoVie
          TextView mTvName;
         @Bind(R.id.tv_project_time)
          TextView mTvTime;
+        @Bind(R.id.layout_ganhuo)
+         LinearLayout mLayout_ganhuo;
         public GanHuoViewHolder(View itemView) {
             super(itemView);
-            ButterKnife.bind(this,itemView);
         }
     }
 }
