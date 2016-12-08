@@ -9,7 +9,6 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.jack.bean.GanHuoBean;
-import com.jack.bean.GanIO;
 import com.jack.main.R;
 
 import java.util.List;
@@ -48,8 +47,8 @@ public class GanHuoAdapter  extends RecyclerView.Adapter<GanHuoAdapter.GanHuoVie
 
 
     }
-   public  void addData( List<GanHuoBean> mData){
-       mData.addAll(mData);
+   public  void addData( List<GanHuoBean> data){
+       this.mData.addAll(data);
        this.notifyDataSetChanged();
 
    }
