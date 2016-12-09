@@ -7,6 +7,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.jack.main.R;
 
 import butterknife.ButterKnife;
 
@@ -22,7 +23,7 @@ public class BaseRecyclerViewHolder extends RecyclerView.ViewHolder {
         ButterKnife.bind(this,itemView);
     }
     public  void setImage(String url, ImageView img){
-        Glide.with(mContext).load(url).into(img);
+        Glide.with(mContext).load(url).placeholder(R.mipmap.ic_launcher).into(img);
     }
     public  void  setText(String test, TextView  textView){
         textView.setText(test);

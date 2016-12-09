@@ -51,7 +51,10 @@ public class GanHuoAdapter extends BaseRecyclerViewAdapter<GanHuoBean> {
         }
 
     }
-    public  void addData(List<GanHuoBean> data){
+    public  void addData(List<GanHuoBean> data,boolean IsRefresh){
+        if(IsRefresh){
+            mData.clear();
+        }
         mData.addAll(data);
         notifyDataSetChanged();
     }

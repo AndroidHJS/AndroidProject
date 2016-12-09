@@ -6,11 +6,14 @@ import android.view.View;
 
 import com.jack.Net.RetrofitHelper;
 import com.jack.adapter.GanHuoAdapter;
+import com.jack.bean.GanHuoBean;
 import com.jack.bean.GanIO;
 import com.jack.comment.base.BaseFragment;
 import com.jack.main.R;
 import com.jcodecraeer.xrecyclerview.ProgressStyle;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
+
+import java.util.ArrayList;
 
 import butterknife.Bind;
 
@@ -25,7 +28,7 @@ public class GanioFragment extends BaseFragment {
     private static  int PAGE_NUM = 1;
     private static final int PAGE = 5;
     private GanHuoAdapter mAdapter;
-    private  boolean mIsLoadRefresh=true;
+    private  boolean mIsRefresh=false;
     @Override
     public View getView(LayoutInflater inflater) {
         View view=inflater.inflate(R.layout.fragment_ganio,null);
@@ -37,47 +40,41 @@ public class GanioFragment extends BaseFragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager(mActivity);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mXRecyclerView.setLayoutManager(layoutManager);
-        mXRecyclerView.setLoadingMoreProgressStyle(ProgressStyle.BallGridPulse);
-        mXRecyclerView.setRefreshProgressStyle(ProgressStyle.BallSpinFadeLoader);
-        mXRecyclerView.setLoadingMoreEnabled(true);
         RetrofitHelper.getGanHuoList(this,PAGE,PAGE, GanIO.class);
         mXRecyclerView.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {
-                mIsLoadRefresh=false;
+                mIsRefresh=true;
                 PAGE_NUM=1;
                 RetrofitHelper.getGanHuoList(GanioFragment.this,PAGE,PAGE_NUM, GanIO.class);
             }
 
             @Override
             public void onLoadMore() {
+             mIsRefresh=false;
              PAGE_NUM++;
              RetrofitHelper.getGanHuoList(GanioFragment.this,PAGE,PAGE_NUM, GanIO.class);
             }
         });
-
+        mAdapter=new GanHuoAdapter(new ArrayList<GanHuoBean>());
+        mXRecyclerView.setAdapter(mAdapter);
     }
 
     @Override
     public void bindData(Object obj) {
         if(obj instanceof GanIO){
             GanIO ganHuo= (GanIO) obj;
-            if(mAdapter==null){
-                mAdapter=new GanHuoAdapter(ganHuo.getResults());
-                mXRecyclerView.setAdapter(mAdapter);
-                return;
-            }
-            if(!mIsLoadRefresh){
+            mAdapter.addData(ganHuo.getResults(),mIsRefresh);
+            if(mIsRefresh){
                 mXRecyclerView.refreshComplete();
-                mIsLoadRefresh=true;
             }else{
-                mAdapter.addData(ganHuo.getResults());
                 mXRecyclerView.loadMoreComplete();
             }
-
         }
 
     }
-
-
+    @Override
+    public XRecyclerView getXRecyclerView() {
+        return mXRecyclerView;
+    }
 }

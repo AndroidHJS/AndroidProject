@@ -3,6 +3,7 @@ package com.jack.adapter;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.jack.bean.MeiZhiBean;
 import com.jack.comment.base.BaseRecyclerViewAdapter;
 import com.jack.comment.base.BaseRecyclerViewHolder;
@@ -44,5 +45,12 @@ public class MeiZhiAdapter extends BaseRecyclerViewAdapter<MeiZhiBean> {
         public MeiZhiHolder(View itemView) {
             super(itemView);
         }
+    }
+    public  void  addData(List<MeiZhiBean> data,boolean refresh){
+        if(refresh){
+            mData.clear();
+        }
+        mData.addAll(data);
+        notifyDataSetChanged();
     }
 }
