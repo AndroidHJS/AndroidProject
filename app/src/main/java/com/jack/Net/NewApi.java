@@ -13,5 +13,7 @@ public interface NewApi {
     Call<String> getNewLatest();
     @GET("api/4/news/{id}")
     Call<String> getZhihuStory(@Path("id") String id);
+    @GET("api/4/theme/{id}")
+    Call<String> getThemeStory(@Path("id") String id);
 
 }

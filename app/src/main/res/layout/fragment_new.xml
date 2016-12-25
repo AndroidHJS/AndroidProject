@@ -4,33 +4,11 @@
     android:layout_height="match_parent">
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
         <LinearLayout
+            android:id="@+id/layout_new_container"
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <android.support.v4.view.ViewPager
-                android:id="@+id/viewpage_bannne"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="20dp"
-                android:paddingLeft="3dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
-                android:text="最新资讯"/>
-            <LinearLayout
-                android:id="@+id/layout_stority"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:orientation="vertical"
-                android:layout_weight="1"
-                android:paddingLeft="3dp"
-                android:paddingRight="3dp"
-               />
-
-
-        </LinearLayout>
-    </android.support.v4.widget.NestedScrollView>
+            android:layout_height="wrap_content"/>
+ </android.support.v4.widget.NestedScrollView>
 </LinearLayout>

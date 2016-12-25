@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.jack.mymy.GanHuoDatailsActivity">
+    tools:context="com.jack.UI.GanHuoDatailsActivity">
     <android.support.v7.widget.Toolbar
         app:navigationIcon="?attr/homeAsUpIndicator"
         android:id="@+id/toolbar_datails"
