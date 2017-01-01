@@ -1,5 +1,7 @@
 package com.jack.utils;
 
+import com.jack.Cache.CacheManager;
+
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;

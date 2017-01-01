@@ -17,9 +17,9 @@ public class BoomButtonUtils {
     };
     private static String[] menuText=new String[]{
       "Android",
+       "前端",
        "IOS",
-       "妹子" ,
-        "java"
+       "妹子"
     };
     private static int imageResourceIndex = 0;
 

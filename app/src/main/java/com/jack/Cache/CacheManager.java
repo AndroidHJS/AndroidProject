@@ -2,6 +2,9 @@ package com.jack.Cache;
 
 import android.util.Log;
 
+import com.jack.bean.BaseBean;
+import com.jack.utils.ToastUtils;
+
 import rx.Observable;
 import rx.functions.Action1;
 import rx.functions.Func1;
@@ -28,15 +31,14 @@ public class CacheManager {
         }
         return  mInstance;
     }
-    public  <T> Observable<T> loadData(String key, Class<T> cls, NetWorkCache<T> networkCache){
+    public  <T extends BaseBean> Observable<T> loadData(String key, Class<T> cls, NetWorkCache<T> networkCache){
         Observable<T> MemoryObservable = LoadMemoryData(key, cls);
         Observable<T> DiskObservable = LoadDiskData(key, cls);
         Observable<T> NetObservable = LoadNetData(key, cls, networkCache);
         Observable<T> observable =  Observable.concat(MemoryObservable,DiskObservable,NetObservable).first(new Func1<T, Boolean>() {
             @Override
             public Boolean call(T t) {
-                System.out.println("开始调用"+t != null);
-                return t != null ;
+                return t!=null&&!t.isExpire() ;
             }
         });
 
@@ -64,6 +66,7 @@ public class CacheManager {
            @Override
            public void call(T t) {
                if(t!=null){
+                   ToastUtils.showToast("从网上获取数据");
                    Log.i(Tag,"存放数据到内存 和硬盘");
                    mMemoryCache.put(key,t);
                    mDiskCache.put(key,t);

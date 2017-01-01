@@ -6,7 +6,7 @@ import java.util.List;
  * Created by Administrator on 2016/12/8.
  */
 
-public class MeiZhi {
+public class MeiZhi extends BaseBean {
     private String error;
     private List<MeiZhiBean>  results;
 

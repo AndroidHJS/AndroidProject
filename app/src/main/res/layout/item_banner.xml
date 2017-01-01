@@ -18,7 +18,6 @@
         android:layout_marginLeft="3dp"
         android:layout_marginRight="3dp"
         android:layout_gravity="bottom"
-
         android:layout_height="30dp">
         <TextView
             android:paddingLeft="2dp"

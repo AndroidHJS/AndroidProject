@@ -17,9 +17,16 @@
         android:background="@color/colorPrimary"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         />
+  <RelativeLayout
+      android:id="@+id/layout_gan_huo_detail"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent">
+      <WebView
+          android:id="@+id/webView_ganghuo"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"/>
+       <include layout="@layout/view_loading"/>
+        <include layout="@layout/view_net_error"/>
+  </RelativeLayout>
 
-<WebView
-    android:id="@+id/webView_ganghuo"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"/>
 </LinearLayout>

@@ -1,25 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:paddingLeft="3dp"
-    android:paddingRight="3dp"
-    android:layout_height="100dp">
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="6dp"
+    app:cardMaxElevation="12dp"
+    app:cardUseCompatPadding="true">
+
   <ImageView
-    android:src="@mipmap/ic_launcher"
-    android:id="@+id/img_meizhi"
-    android:layout_width="wrap_content"
-    android:scaleType="fitXY"
-    android:layout_height="100dp"
-    android:layout_gravity="center_horizontal"/>
-    <TextView
-        android:text="jack"
-        android:id="@+id/tv_meizhi_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal|bottom"/>
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:background="#666"/>
-</LinearLayout>
+      android:id="@+id/img_meizhi"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:scaleType="centerCrop"
+     />
+
+</android.support.v7.widget.CardView>

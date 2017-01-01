@@ -1,9 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
-<com.jcodecraeer.xrecyclerview.XRecyclerView
-    android:id="@+id/RecyclerView_meizhi"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"/>
-</LinearLayout>
+    <ImageView
+        android:id="@+id/blurView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#3f000000"
+        android:scaleType="centerCrop"/>
+
+    <com.jack.View.GalleryView.SpeedRecyclerView
+        android:id="@+id/RecyclerView_meizhi"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="30dp"
+        android:layout_marginTop="30dp"/>
+</RelativeLayout>

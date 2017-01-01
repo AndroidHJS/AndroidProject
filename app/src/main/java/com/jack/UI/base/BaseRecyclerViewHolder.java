@@ -27,6 +27,15 @@ public  abstract class BaseRecyclerViewHolder<T> extends RecyclerView.ViewHolder
     public  void setImage(String url, ImageView img){
         Glide.with(mContext).load(url).placeholder(R.mipmap.ic_launcher).into(img);
     }
+    public  void  setGone(View view){
+        view.setVisibility(View.GONE);
+    }
+    public  void  setVisibility(View view){
+        view.setVisibility(View.VISIBLE);
+    }
+    public  void  setInVisibility(View view){
+        view.setVisibility(View.INVISIBLE);
+    }
     public  void  setText(String test, TextView  textView){
         textView.setText(test);
     }

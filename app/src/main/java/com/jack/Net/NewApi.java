@@ -1,19 +1,25 @@
 package com.jack.Net;
 
+import com.jack.bean.InternetSafe;
+import com.jack.bean.New;
+import com.jack.bean.NewDetaiBean;
+
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
+import rx.Observable;
 
 /**
  * Created by Administrator on 2016/12/5.
  */
 
 public interface NewApi {
-    @GET("api/4/news/latest")
-    Call<String> getNewLatest();
-    @GET("api/4/news/{id}")
-    Call<String> getZhihuStory(@Path("id") String id);
-    @GET("api/4/theme/{id}")
-    Call<String> getThemeStory(@Path("id") String id);
+    @GET("news/latest")
+    Observable<New> getNewLatest();
+    @GET("news/{id}")
+    Observable<NewDetaiBean> getZhihuStory(@Path("id") String id);
+    @GET("theme/{id}")
+    Observable<InternetSafe>  getThemeStory(@Path("id") String id);
+
 
 }

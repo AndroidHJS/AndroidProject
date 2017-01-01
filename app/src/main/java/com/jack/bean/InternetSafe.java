@@ -6,7 +6,7 @@ import java.util.List;
  * Created by Administrator on 2016/12/18.
  */
 
-public class InternetSafe {
+public class InternetSafe  extends BaseBean{
     private String description;
     private  String background;
     private  String color;

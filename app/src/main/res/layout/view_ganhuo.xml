@@ -4,12 +4,13 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:id="@+id/layout_ganhuo_content"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
     android:layout_height="match_parent">
 
   <FrameLayout
+      app:layout_behavior="@string/appbar_scrolling_view_behavior"
       android:id="@+id/layout_gan_huo"
       android:layout_width="match_parent"
+      android:layout_marginTop="?attr/actionBarSize"
       android:layout_height="match_parent"/>
   <com.nightonke.boommenu.BoomMenuButton
       android:id="@+id/boom_button"

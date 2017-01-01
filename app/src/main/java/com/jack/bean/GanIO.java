@@ -6,7 +6,7 @@ import java.util.List;
  * Created by Administrator on 2016/12/6.
  */
 
-public class GanIO {
+public class GanIO  extends BaseBean {
   private String error;
     private List<GanHuoBean> results;
 

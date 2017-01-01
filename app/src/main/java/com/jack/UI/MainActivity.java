@@ -19,6 +19,7 @@ import com.jack.UI.fragment.GanioFragment;
 import com.jack.UI.fragment.InternetSafeFragment;
 import com.jack.UI.fragment.MeiZiFragment;
 import com.jack.UI.fragment.NewFragment;
+import com.jack.global.Constant;
 import com.jack.main.R;
 import com.jack.utils.BoomButtonUtils;
 import com.nightonke.boommenu.BoomButtons.BoomButton;
@@ -52,15 +53,25 @@ public class MainActivity extends BaseActivity {
     private static final int  PAGE_ZHI_HU= 511;
     private static final  int  PAGE_GAN_HU0= 999;
     private  static  int mCurrentPage=PAGE_ZHI_HU;
+    private  static  int mCurrentPos=0;
     private MainAdapter mMainAdapter;
     private String[] mTabs=new String[]{
-            "新闻","互联网安全"
+            "新闻","互联网安全","体育","音乐"
+    };
+    private String[] mGanHuoTab=new String[]{
+            "Android","前端","iOS","妹子"
     };
     private BaseFragment[] mZhiHuFragments =new BaseFragment[] {
-            new NewFragment(),new InternetSafeFragment(),
+            new NewFragment(),
+            InternetSafeFragment.getIntance(Constant.ZhiHuCategory.InternetSaFe),
+            InternetSafeFragment.getIntance(Constant.ZhiHuCategory.Sports),
+            InternetSafeFragment.getIntance(Constant.ZhiHuCategory.Music),
     };
     private BaseFragment[] mGanHuoFragments=new BaseFragment[]{
-            new GanioFragment(),new MeiZiFragment()
+            GanioFragment.getIntance("Android"),
+            GanioFragment.getIntance("前端"),
+            GanioFragment.getIntance("iOS"),
+            new MeiZiFragment()
     };
     private  BaseFragment mCurrentGanhuoFragment=mGanHuoFragments[0];
     private  Toolbar.OnMenuItemClickListener mMenuItemListener=new Toolbar.OnMenuItemClickListener() {
@@ -91,6 +102,7 @@ public class MainActivity extends BaseActivity {
                 case R.id.tv_gan_huo:
                     mCurrentPage=PAGE_GAN_HU0;
                     switchPage(mCurrentPage);
+                    mToolBar.setTitle(mGanHuoTab[mCurrentPos]);
                     if(!mCurrentGanhuoFragment.isAdded()){
                         mFragmentManager.beginTransaction().add(R.id.layout_gan_huo,mCurrentGanhuoFragment).commit();
                         mCurrentGanhuoFragment.setUserVisibleHint(true);
@@ -99,6 +111,7 @@ public class MainActivity extends BaseActivity {
                 case R.id.tv_zhi_hu:
                     mCurrentPage=PAGE_ZHI_HU;
                     switchPage(mCurrentPage);
+                    mToolBar.setTitle("知乎");
                     break;
                  default:
                      mDrawerLayout.openDrawer(Gravity.LEFT);
@@ -112,6 +125,7 @@ public class MainActivity extends BaseActivity {
     public void initData() {
         if(mCurrentPage==PAGE_ZHI_HU){
             switchPage(mCurrentPage);
+            mToolBar.setTitle("知乎");
         }else if(mCurrentPage==PAGE_GAN_HU0){
             switchPage(mCurrentPage);
             if(!mCurrentGanhuoFragment.isAdded()){
@@ -155,8 +169,10 @@ public class MainActivity extends BaseActivity {
         mBoomButton.setOnBoomListener(new OnBoomListenerAdapter (){
             @Override
             public void onClicked(int index, BoomButton boomButton) {
+                mCurrentPos=index;
                 BaseFragment baseFragment=mGanHuoFragments[index];
                 switchPageGanHuo(baseFragment);
+                mToolBar.setTitle(mGanHuoTab[index]);
             }
         });
 

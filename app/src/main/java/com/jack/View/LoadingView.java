@@ -2,6 +2,7 @@ package com.jack.View;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
 
@@ -26,13 +27,19 @@ public class LoadingView extends FrameLayout {
     View mLayoutLoading;
     View  mLayoutSuccess;
     public LoadingView(Context context) {
-        super(context,null);
+        this(context,null);
     }
 
     public LoadingView(Context context, AttributeSet attrs) {
-        super(context, attrs);
+        this(context, attrs,0);
+
+
+    }
+    public  LoadingView(Context context, AttributeSet attrs, int defStyle){
+        super(context,attrs,defStyle);
         this.mContext=context;
         init();
+
     }
     private  void init(){
         createLoadingView();
@@ -40,12 +47,14 @@ public class LoadingView extends FrameLayout {
         ButterKnife.bind(this,this);
     }
     private View createLoadingView(){
-        View LoadingView=View.inflate(mContext, R.layout.view_loading,this);
+       View LoadingView=View.inflate(mContext, R.layout.view_loading,this);
+//        View LoadingView = LayoutInflater.from(mContext).inflate(R.layout.view_loading, this, false);
         return  LoadingView;
 
     }
     private  View  createNetErrorView(){
-        View NetErrorView=View.inflate(mContext, R.layout.view_net_error,this);
+     View NetErrorView=View.inflate(mContext, R.layout.view_net_error,this);
+//        View NetErrorView = LayoutInflater.from(mContext).inflate(R.layout.view_net_error, this, false);
         return  NetErrorView;
     }
     public   void  initLoadView(BaseFragment fragment){

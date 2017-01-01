@@ -6,7 +6,7 @@ import java.util.List;
  * Created by Administrator on 2016/12/5.
  */
 
-public class New {
+public class New extends BaseBean{
     private String date;
     private List<StoriesBean> stories;
     private  List<TopSotriesBean> top_stories;

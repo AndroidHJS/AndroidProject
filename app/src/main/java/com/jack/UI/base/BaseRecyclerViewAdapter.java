@@ -45,6 +45,7 @@ public abstract  class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<B
     public  void addData(List<T> data, boolean IsRefresh){
         if(IsRefresh){
             mData.clear();
+
         }
         mData.addAll(data);
         notifyDataSetChanged();
