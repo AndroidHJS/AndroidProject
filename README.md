@@ -28,6 +28,6 @@
 
 [点我在看视频](http://www.iqiyi.com/w_19ru5v1kkl.html)
 
-GitHub地址：
+
 希望大家可以点个Star,fork
 后期还会添加很多知识 比如 T-MVP,不调用任何第三方库完成分享，还有些酷炫的控件等等 
