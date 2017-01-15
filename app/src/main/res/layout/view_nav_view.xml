@@ -20,6 +20,7 @@
           app:border_width="2dp"
           android:src="@mipmap/ic_avatar_default"/>
       <TextView
+          android:id="@+id/tv_login"
           android:layout_marginTop="20dp"
           android:layout_below="@id/img_avatar"
           android:textSize="16sp"

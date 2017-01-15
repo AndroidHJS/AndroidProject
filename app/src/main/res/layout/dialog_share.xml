@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+       android:layout_alignParentBottom="true"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:background="#FFF"
+        android:layout_height="200dp">
+        <TextView
+            android:textSize="18sp"
+            android:text="分享到..."
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+       <LinearLayout
+           android:layout_marginTop="20dp"
+           android:orientation="horizontal"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content">
+           <ImageButton
+               android:background="@color/white"
+               android:id="@+id/btn_weibo_share"
+               android:layout_weight="1"
+               android:src="@mipmap/sina_weibo_share"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content" />
+           <ImageButton
+               android:background="@color/white"
+               android:id="@+id/btn_wechat_share"
+               android:layout_weight="1"
+               android:src="@mipmap/wechatshare"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content" />
+           <ImageButton
+               android:background="@color/white"
+               android:id="@+id/btn_qq_share"
+               android:layout_weight="1"
+               android:src="@mipmap/qqshare"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content" />
+       </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>

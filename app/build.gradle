@@ -23,11 +23,39 @@ android {
         println("ZhiHuBaseUrl"+"\"${ZhiHuBaseUrl}\"");
 
     }
+    signingConfigs {
+        debug {
+            storeFile file('../app.jks')//签名文件路径
+            storePassword "123456"
+            keyAlias "app"
+            keyPassword "123456"  //签名密码
+            println("====== signingConfigs.debug ======")
+        }
+        release {
+            storeFile file('../app.jks')//签名文件路径
+            storePassword "123456"
+            keyAlias "app"
+            keyPassword "123456"  //签名密码
+            println("====== signingConfigs.release ======")
+        }
     buildTypes {
+        debug{
+            signingConfig signingConfigs.debug
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
+
+
+    }
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+
     }
 }
 
@@ -36,7 +64,6 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-
     compile 'com.android.support:recyclerview-v7:24.2.0'
     compile 'com.android.support:appcompat-v7:24+'
     testCompile 'junit:junit:4.12'
@@ -56,6 +83,7 @@ dependencies {
     compile 'io.reactivex:rxjava:1.1.5'
     compile 'io.reactivex:rxandroid:1.2.0'
     compile 'com.github.jrvansuita:GaussianBlur:v1.0.2'
-
-
+    compile files('libs/open_sdk_r5778_lite.jar')
+    compile files('libs/weiboSDKCore_3.1.4.jar')
+    compile files('libs/libammsdk.jar')
 }

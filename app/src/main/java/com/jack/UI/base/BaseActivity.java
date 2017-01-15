@@ -15,11 +15,16 @@ import butterknife.ButterKnife;
  */
 
 public abstract  class BaseActivity extends AppCompatActivity {
+    Bundle mSavedInstanceState;
+    public Bundle getSavedInstanceState(){
+        return mSavedInstanceState ;
+    }
 
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mSavedInstanceState=savedInstanceState;
         setContentView(getLayoutId());
         ButterKnife.bind(this);
         init();

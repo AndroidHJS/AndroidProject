@@ -1,6 +1,5 @@
 package com.jack.UI;
 
-import android.graphics.Color;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -9,17 +8,12 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
-import com.jack.Net.RequestListener;
 import com.jack.Net.RetrofitHelper;
+import com.jack.UI.base.BaseActivity;
 import com.jack.bean.NewDetaiBean;
 import com.jack.bean.StoriesBean;
-import com.jack.UI.base.BaseActivity;
 import com.jack.main.R;
 import com.jack.utils.RxJavaUtils;
-
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import butterknife.Bind;
 import rx.functions.Action1;
@@ -62,6 +56,7 @@ public class NewDatailsActivity extends BaseActivity {
                 System.out.println(throwable.toString());
             }
         });
+
     }
 
     @Override
@@ -71,8 +66,10 @@ public class NewDatailsActivity extends BaseActivity {
 
     }
 
+
     @Override
     public int getLayoutId() {
         return R.layout.activity_new_datails;
     }
+
 }

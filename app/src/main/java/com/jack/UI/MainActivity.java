@@ -1,5 +1,7 @@
 package com.jack.UI;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
@@ -12,6 +14,8 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
 import com.jack.UI.adapter.MainAdapter;
 import com.jack.UI.base.BaseActivity;
 import com.jack.UI.base.BaseFragment;
@@ -19,9 +23,14 @@ import com.jack.UI.fragment.GanioFragment;
 import com.jack.UI.fragment.InternetSafeFragment;
 import com.jack.UI.fragment.MeiZiFragment;
 import com.jack.UI.fragment.NewFragment;
+import com.jack.View.CircleImageView;
 import com.jack.global.Constant;
+import com.jack.global.UserInfo;
+import com.jack.login.Base.User;
+import com.jack.login.LoginActivity;
 import com.jack.main.R;
 import com.jack.utils.BoomButtonUtils;
+import com.jack.utils.ToastUtils;
 import com.nightonke.boommenu.BoomButtons.BoomButton;
 import com.nightonke.boommenu.BoomButtons.ButtonPlaceEnum;
 import com.nightonke.boommenu.BoomMenuButton;
@@ -30,6 +39,7 @@ import com.nightonke.boommenu.OnBoomListenerAdapter;
 import com.nightonke.boommenu.Piece.PiecePlaceEnum;
 
 import butterknife.Bind;
+import butterknife.OnClick;
 
 public class MainActivity extends BaseActivity {
     @Bind(R.id.tabs)
@@ -50,6 +60,11 @@ public class MainActivity extends BaseActivity {
     BoomMenuButton mBoomButton;
     @Bind(R.id.layout_gan_huo)
     FrameLayout mLayoutGanHuo;
+    @Bind(R.id.img_avatar)
+    CircleImageView mImgAvatar;
+    @Bind(R.id.tv_login)
+    TextView  mUserName;
+    private UserInfo mUserInfo;
     private static final int  PAGE_ZHI_HU= 511;
     private static final  int  PAGE_GAN_HU0= 999;
     private  static  int mCurrentPage=PAGE_ZHI_HU;
@@ -123,6 +138,11 @@ public class MainActivity extends BaseActivity {
     private FragmentManager mFragmentManager;
     @Override
     public void initData() {
+        if(mUserInfo.isLogin()){
+            User user = mUserInfo.readUser();
+            mUserName.setText(user.getNickname());
+            Glide.with(this).load(user.getHeadImageUrl()).into(mImgAvatar);
+        }
         if(mCurrentPage==PAGE_ZHI_HU){
             switchPage(mCurrentPage);
             mToolBar.setTitle("知乎");
@@ -138,6 +158,7 @@ public class MainActivity extends BaseActivity {
     public void init(){
         mFragmentManager=this.getSupportFragmentManager();
         setSupportActionBar(mToolBar);
+        mUserInfo=UserInfo.getInstance();
         mMainAdapter= new MainAdapter(mFragmentManager,mTabs, mZhiHuFragments);
         mMainViewPager.setAdapter(mMainAdapter);
         mMainTayLayout.setupWithViewPager(mMainViewPager);
@@ -219,6 +240,26 @@ public class MainActivity extends BaseActivity {
        mCurrentGanhuoFragment=fragment;
 
    }
+    @OnClick({R.id.img_avatar,R.id.tv_login})
+    public  void enterLoging(View view){
+        if (UserInfo.getInstance().isLogin()){
+            ToastUtils.showToast("已经登录");
+            return;
+        }
+        ToastUtils.showToast("点击登录");
+        Intent intent=new Intent(this,LoginActivity.class);
+        startActivityForResult(intent,200);
+    }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode!= Activity.RESULT_OK){
+            return;
+        }
+        if(requestCode==200){
+            User user= (User) data.getSerializableExtra("user");
 
+        }
+    }
 }
