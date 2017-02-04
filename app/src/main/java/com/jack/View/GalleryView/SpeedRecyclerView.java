@@ -10,7 +10,6 @@ import com.jcodecraeer.xrecyclerview.XRecyclerView;
 /**
  * 控制fling速度的RecyclerView
  *
- * Created by jameson on 9/1/16.
  */
 public class SpeedRecyclerView extends RecyclerView {
     private static final float FLING_SCALE_DOWN_FACTOR = 0.5f; // 减速因子
